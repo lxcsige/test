@@ -35,7 +35,7 @@ public class Solution {
     /**
      * 单链表中是否存在环
      * @param head
-     * @return 0 - 不存在环，>0 - 环的长度
+     * @return 0 - 不存在环，> 0 - 环的长度
      */
     public int existCircle(Node head) {
         if (head == null) {
