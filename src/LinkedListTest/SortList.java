@@ -13,7 +13,7 @@ public class SortList {
             return head;
         }
 
-        return insertionSort(head);
+        return insertionSort2(head);
     }
 
     /**
@@ -24,8 +24,8 @@ public class SortList {
     private ListNode insertionSort(ListNode head) {
         ListNode pStart = new ListNode(0); // 有序区域开始节点
         pStart.next = head;
-        ListNode p = head.next; // 遍历链表的指针，从head.next开始
         ListNode pEnd = head; // 有序区域结束节点
+        ListNode p = head.next; // 遍历链表的指针，从head.next开始
 
         while (p != null) {
             ListNode tmp = pStart.next, pre = pStart;
@@ -44,5 +44,46 @@ public class SortList {
         }
 
         return pStart.next;
+    }
+
+    private ListNode insertionSort2(ListNode head) {
+        if( head == null || head.next == null){
+            return head;
+        }
+
+        ListNode dummy = new ListNode(0);
+        ListNode cur = head; //the node will be inserted
+        ListNode pre = dummy; //insert node between pre and pre.next
+        ListNode next; //the next node will be inserted
+        while( cur != null ){
+            next = cur.next;
+            while( pre.next != null && pre.next.val < cur.val ){
+                pre = pre.next;
+            }
+            cur.next = pre.next;
+            pre.next = cur;
+            pre = dummy;
+            cur = next;
+        }
+
+        return dummy.next;
+    }
+
+    public static void main(String[] args) {
+        SortList test = new SortList();
+        ListNode head, n1, n2, n3, n4, n5;
+        n1 = new ListNode(5);
+        n2 = new ListNode(2);
+        n3 = new ListNode(4);
+        n4 = new ListNode(3);
+        n5 = new ListNode(1);
+        n1.next = n2;
+        n2.next = n3;
+        n3.next = n4;
+        n4.next = n5;
+        n5.next = null;
+        head = n1;
+        ListNode res = test.sortList(head);
+        System.out.print(res);
     }
 }
