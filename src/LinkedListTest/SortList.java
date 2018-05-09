@@ -1,7 +1,5 @@
 package LinkedListTest;
 
-import javax.swing.text.Position;
-
 /**
  * User: lxcfour
  * Date: 2018/5/2
@@ -15,7 +13,7 @@ public class SortList {
             return head;
         }
 
-        return insertionSort(head);
+        return insertionSort2(head);
     }
 
     /**
@@ -28,6 +26,7 @@ public class SortList {
         pStart.next = head;
         ListNode cur = head.next; // 待插入的节点
         ListNode pEnd = head; // 有序区域结束节点
+        ListNode p = head.next; // 遍历链表的指针，从head.next开始
 
         while (cur != null) {
             ListNode pre = pStart;
@@ -250,6 +249,7 @@ public class SortList {
         n4.next = n5;
         n5.next = null;
         head = n1;
-        ListNode res = test.bubbleSort(head);
+        ListNode res = test.sortList(head);
+        System.out.print(res);
     }
 }
