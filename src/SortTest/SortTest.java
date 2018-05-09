@@ -26,7 +26,7 @@ public class SortTest {
     }
 
     /**
-     * 直接插入排序，时间复杂度O(n^2)，稳定
+     * 直接插入排序，时间复杂度O(n^2)，in-place，稳定
      *
      * @param arr
      */
@@ -46,6 +46,7 @@ public class SortTest {
     /**
      * 希尔排序，增量序列，将一个数组分割成若干个子序列，分别进行直接插入排序，直到增量为1
      * 直接插入排序的改进，时间复杂度跟增量序列有关
+     * 时间复杂度小于O(n^2)，
      *
      * @param arr
      */
@@ -65,8 +66,9 @@ public class SortTest {
     }
 
     /**
-     * 选择排序，选出剩下元素里最大/最小的元素，时间复杂度O(n^2)
+     * 选择排序，选出剩下元素里最大/最小的元素，时间复杂度O(n^2)，就地排序
      * 不稳定
+     * {(7), 2, 5, 9, 3, 4, [7], 1}，不稳定的例子
      *
      * @param arr
      */
@@ -191,13 +193,13 @@ public class SortTest {
     }
 
     /**
-     * 冒泡排序改进1，设置exchange变量标记本次排序是否有交换，没有则理解返回
+     * 冒泡排序改进1，设置exchange变量标记本次排序是否有交换，没有则直接返回
      *
      * @param arr
      */
     private void bubbleSort1(int[] arr) {
-        boolean exchange = false;
         for (int i = 0; i < arr.length - 1; i++) {
+            boolean exchange = false;
             for (int j = 0; j < arr.length - i - 1; j++) {
                 if (arr[j] > arr[j + 1]) {
                     int temp = arr[j];
@@ -281,9 +283,7 @@ public class SortTest {
     }
 
     private void nonRecursiveQuickSort(int[] arr) {
-        int left = 0;
-        int right = arr.length - 1;
-        int pivot;
+        int left = 0, right = arr.length - 1, pivot;
         Stack<Integer> stack = new Stack<>();
         stack.push(left);
         stack.push(right);
@@ -304,11 +304,11 @@ public class SortTest {
 
     private int partition(int[] arr, int low, int high) {
         dealPivot(arr, low, high);
-        int partitionKey = arr[ high - 1];
+        int pivot = arr[ high - 1];
         int i = low;
         int j = high - 1;
         while (i < j) {
-            while (i < j && arr[i] <= partitionKey) {
+            while (i < j && arr[i] <= pivot) {
                 i++;
             }
 //            swap(arr, low, high); // 与基准值作交换
@@ -316,7 +316,7 @@ public class SortTest {
                 arr[j--] = arr[i];
             }
 
-            while (i < j && arr[j] >= partitionKey) {
+            while (i < j && arr[j] >= pivot) {
                 j--;
             }
 //            swap(arr, low, high); // 与基准值作交换
@@ -324,8 +324,23 @@ public class SortTest {
                 arr[i++] = arr[j];
             }
         }
-        arr[i] = partitionKey;
+        arr[i] = pivot;
         return i;
+    }
+
+    private int partition2(int[] arr, int low, int high) {
+        int pivot = arr[high];
+        int loc = low - 1; // loc指向比pivot小的元素区域end
+        for (int i = low; i < high; i++) {
+            if (arr[i] < pivot) {
+                swap(arr, i, ++loc);
+            }
+        }
+        if (high != loc + 1) { // 最坏情况high = loc + 1，退化为冒泡排序
+            swap(arr, high, loc + 1);
+        }
+
+        return loc + 1;
     }
 
     private void swap(int[] arr, int a, int b) {

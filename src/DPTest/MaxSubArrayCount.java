@@ -1,14 +1,14 @@
-package MaxSubListTest;
+package DPTest;
 
 /**
  * Created by liuxucheng on 2018/4/9.
  * description: 最大连续子序列和，如果所有整数都是负数，则最大子序列和为0
  * 需要注意数组全部为负的情况
  */
-public class Solution {
+public class MaxSubArrayCount {
 
     public static void main(String[] args) {
-        Solution solution = new Solution();
+        MaxSubArrayCount solution = new MaxSubArrayCount();
         int[] arr= {4, -3, 5, -2, -1, 2, 6, -2};
 //        System.out.println(solution.handle1(arr, 0, 7));
         System.out.println(solution.handle2(arr));
@@ -53,14 +53,14 @@ public class Solution {
         return maxSum;
     }
 
-    private int handle2(int[] arr) {
+    private int handle2(int[] nums) {
         int sum = 0;
-        int maxSum = 0;
-        for (int i = 0; i < arr.length; i++) {
+        int maxSum = nums[0];
+        for (int i = 0; i < nums.length; i++) {
             if (sum < 0) {
-                sum = arr[i];
+                sum = nums[i];
             } else {
-                sum += arr[i];
+                sum += nums[i];
             }
             if (sum > maxSum) {
                 maxSum = sum;
