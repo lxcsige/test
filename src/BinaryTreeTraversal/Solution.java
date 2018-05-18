@@ -1,8 +1,6 @@
 package BinaryTreeTraversal;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by liuxucheng on 2018/5/8.
@@ -87,6 +85,14 @@ public class Solution {
         return res;
     }
 
+    private void inOrder(TreeNode node, List<Integer> res) {
+        if (node != null) {
+            inOrder(node.left, res);
+            res.add(node.val);
+            inOrder(node.right, res);
+        }
+    }
+
     private List<Integer> inOrder(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         if (root == null) {
@@ -125,20 +131,27 @@ public class Solution {
                 cur = cur.left;
             }
 
-            cur = stack.peek();
-            if (cur.right == null || cur.right == prev) {
-                res.add(cur.val);
-                stack.pop();
-                prev = cur;
-                cur = null;
-            } else {
-                cur = cur.right;
+            if (!stack.isEmpty()) {
+                cur = stack.peek();
+                if (cur.right == null || cur.right == prev) {
+                    res.add(cur.val);
+                    stack.pop();
+                    prev = cur;
+                    cur = null;
+                } else {
+                    cur = cur.right;
+                }
             }
         }
 
         return res;
     }
 
+    /**
+     * 节点入栈，不存在子节点或存在且左节点和又节点都被访问过则直接出栈并输出
+     * @param root
+     * @return
+     */
     private List<Integer> postOrder2(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         if (root == null) {
@@ -168,19 +181,82 @@ public class Solution {
         return res;
     }
 
-    private void inOrder(TreeNode node, List<Integer> res) {
-        if (node != null) {
-            inOrder(node.left, res);
-            res.add(node.val);
-            inOrder(node.right, res);
-        }
-    }
-
     private void postOrder(TreeNode node, List<Integer> res) {
         if (node != null) {
             postOrder(node.left, res);
             postOrder(node.right, res);
             res.add(node.val);
         }
+    }
+
+    /**
+     * 层次遍历
+     * @param root
+     */
+    private List<Integer> levelTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+
+        int level = 0;
+        int parentSize = 1;
+        int childSize = 0;
+        TreeNode cur;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()) {
+            cur = queue.poll();
+            res.add(cur.val);
+            parentSize--;
+
+            if (cur.left != null) {
+                queue.offer(cur.left);
+                childSize++;
+            }
+            if (cur.right != null) {
+                queue.offer(cur.right);
+                childSize++;
+            }
+
+            if (parentSize == 0) {
+                parentSize = childSize;
+                childSize = 0;
+                level++;
+            }
+        }
+
+        System.out.println("level = " + level);
+
+        return res;
+    }
+
+    private List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while(!queue.isEmpty()) {
+            int levelSize = queue.size();
+            List<Integer> subList = new ArrayList<>();
+            for (int i = 0; i < levelSize; i++) {
+                TreeNode cur = queue.poll();
+                if (cur.left != null) {
+                    queue.offer(cur.left);
+                }
+                if (cur.right != null) {
+                    queue.offer(cur.right);
+                }
+                subList.add(cur.val);
+            }
+
+            res.add(0, subList);
+        }
+
+        return res;
     }
 }

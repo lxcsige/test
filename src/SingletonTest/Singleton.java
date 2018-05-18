@@ -7,7 +7,13 @@ public class Singleton {
 
     private static Singleton instance;
 
-    private static Singleton getInstance() {
+    private Singleton()  {
+        if (instance != null) {
+            throw new RuntimeException("fuck you bitch");
+        }
+    }
+
+    public static Singleton getInstance() {
         if (instance == null) {
             instance = new Singleton();
         }
