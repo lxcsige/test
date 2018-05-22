@@ -1,5 +1,7 @@
 package BinaryTreeTraversal;
 
+import java.util.List;
+
 /**
  * Created by liuxucheng on 2018/5/9.
  */
@@ -48,5 +50,25 @@ public class LCA {
             return right;
         }
         return root;
+    }
+
+    private boolean getPath(TreeNode root, TreeNode p, List<TreeNode> path) {
+        if (root == null || p == null) {
+            return false;
+        }
+
+        if (root == p) {
+            path.add(root);
+            return true;
+        }
+
+        path.add(root);
+        if (getPath(root.left, p, path) || getPath(root.right, p, path)) {
+            return true;
+        }
+
+        path.remove(path.size() - 1);
+
+        return false;
     }
 }
