@@ -2,6 +2,7 @@ package HashMapTest;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 /**
@@ -13,5 +14,6 @@ public class SynchronizedMapTest {
 
     public static void main(String[] args) {
         Map<Integer, Integer> map = Collections.synchronizedMap(new HashMap<Integer, Integer>());
+        Hashtable<Integer, Integer> hashtable = new Hashtable<>();
     }
 }
