@@ -14,7 +14,6 @@ public class Test {
 
     public static void main(String[] args) {
         Map<Integer, Integer> map = new ConcurrentHashMap<>(17);
-        ReentrantLock
 //        map = new HashMap<>();
         new Thread("thread-1") {
             @Override

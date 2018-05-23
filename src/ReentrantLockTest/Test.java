@@ -24,9 +24,7 @@ public class Test {
                 try {
                     lock.lockInterruptibly();
                 } catch (InterruptedException e) {
-                    if (Thread.currentThread().isInterrupted()) {
-                        System.out.println(Thread.currentThread().getName() + " interrupted.");
-                    }
+                    System.out.println(Thread.currentThread().getName() + " interrupted.");
                 }
             }
         },"child thread -1");
