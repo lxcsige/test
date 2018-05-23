@@ -1,12 +1,11 @@
-package LinkedListCircle;
+package LinkedListSolution;
 
 /**
  * User: lxcfour
- * Date: 2018/3/13
- * Time: 上午11:10
+ * Date: 2018/5/23
+ * Time: 下午9:23
  */
-public class Solution {
-
+public class Circle {
     public static void main(String[] args) {
         Node head = new Node(0);
         Node node1 = new Node(1);
@@ -27,7 +26,7 @@ public class Solution {
         node7.next = node8;
         node8.next = node5;
 
-        Solution solution = new Solution();
+        Circle solution = new Circle();
         System.out.println("环长 = " + solution.existCircle(head));
         System.out.println("环入口节点 = " + (solution.circleNode(head) == null ? -1 : solution.circleNode(head).getValue()));
     }

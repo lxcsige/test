@@ -1,4 +1,4 @@
-package LinkedListTest;
+package LinkedListSolution;
 
 /**
  * User: lxcfour
