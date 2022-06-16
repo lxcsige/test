@@ -1,13 +1,12 @@
 package ExceptionTest;
 
 /**
- * User: lxcfour
- * Date: 2018/5/11
- * Time: 下午3:59
+ * Created by liuxucheng on 2018/5/20.
  */
 public class Test {
 
     public static void main(String[] args) {
+<<<<<<< HEAD
         try {
             test();
         } catch (Exception e) {
@@ -31,15 +30,26 @@ public class Test {
 
     public int test1() throws MyException {
         int i = 0;
-        try {
-            i = 1/0;
-        } catch(ArithmeticException e) {
-            throw new MyException("算术异常");
-        } finally {
-            return i;
-        }
+=======
+        System.out.println(test());
     }
 
+    public static int test() {
+        int a = 0;
+        int b = 3;
+>>>>>>> e2365a1662e430baf02863f7cbcc3be2736b8959
+        try {
+            b = b / a;
+            return b;
+        } catch (RuntimeException e1) {
+            b = a - b;
+        } catch (Exception e2) {
+            b = a * b;
+        } finally {
+            b = 1;
+        }
+
+<<<<<<< HEAD
     public int test2() {
         int i = 0;
         int res = 3;
@@ -52,5 +62,8 @@ public class Test {
         }
 
         return 0;
+=======
+        return b;
+>>>>>>> e2365a1662e430baf02863f7cbcc3be2736b8959
     }
 }
