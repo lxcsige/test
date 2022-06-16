@@ -3,6 +3,7 @@ package DateTest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -12,12 +13,24 @@ import java.util.List;
 public class DateTest {
 
     public static void main(String[] args) throws ParseException {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-        System.out.println(date.getTime());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.set(Calendar.HOUR, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        int monthNum = (calendar.get(Calendar.YEAR) - 1970) * 12 + calendar.get(Calendar.MONTH);
+        System.out.println(monthNum);
 
-        Date date1 = new Date(1513060455155L);
-        System.out.println(simpleDateFormat.format(date1));
+        List<Date> res = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date tmpDate = dateFormat.parse("1970-01-01");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(tmpDate);
+        cal.add(Calendar.MONTH, monthNum);
+        System.out.println(cal.getTime());
+
+        Date date = new Date();
+        System.out.println((int)(date.getTime() / 86400000));
     }
 
     private static void testLong(long l) {

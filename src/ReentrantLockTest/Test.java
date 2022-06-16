@@ -24,6 +24,7 @@ public class Test {
                 try {
                     lock.lockInterruptibly();
                 } catch (InterruptedException e) {
+                    System.out.println(Thread.currentThread().isInterrupted());
                     System.out.println(Thread.currentThread().getName() + " interrupted.");
                 }
             }

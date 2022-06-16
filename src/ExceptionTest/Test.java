@@ -8,11 +8,28 @@ package ExceptionTest;
 public class Test {
 
     public static void main(String[] args) {
-        Test test = new Test();
-        System.out.println(test.test1());
+        try {
+            test();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public int test() throws MyException {
+
+    private static void test() throws Exception {
+        Connection connection = null;
+        try {
+            connection = new Connection();
+            connection.sendData();
+        }
+        finally {
+            if (connection != null) {
+                connection.close();
+            }
+        }
+    }
+
+    public int test1() throws MyException {
         int i = 0;
         try {
             i = 1/0;
@@ -23,14 +40,17 @@ public class Test {
         }
     }
 
-    public int test1() {
+    public int test2() {
         int i = 0;
+        int res = 3;
         try {
             i = 1/0;
         } catch(ArithmeticException e) {
-            return 1;
+            return --res;
         } finally {
-            return 2;
+            --res;
         }
+
+        return 0;
     }
 }
