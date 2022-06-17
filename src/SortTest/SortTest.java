@@ -303,28 +303,22 @@ public class SortTest {
     }
 
     private int partition(int[] arr, int low, int high) {
-        dealPivot(arr, low, high);
-        int pivot = arr[ high - 1];
+        int pivot = arr[high];
         int i = low;
-        int j = high - 1;
+        int j = high;
         while (i < j) {
             while (i < j && arr[i] <= pivot) {
                 i++;
             }
-//            swap(arr, low, high); // 与基准值作交换
-            if (i < j) {
-                arr[j--] = arr[i];
-            }
+            arr[j] = arr[i];
 
             while (i < j && arr[j] >= pivot) {
                 j--;
             }
-//            swap(arr, low, high); // 与基准值作交换
-            if (i < j) {
-                arr[i++] = arr[j];
-            }
+            arr[i] = arr[j];
         }
         arr[i] = pivot;
+
         return i;
     }
 
