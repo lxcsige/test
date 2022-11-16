@@ -13,7 +13,8 @@ public class Test3 {
             //等待lock锁
             synchronized (lock) {
                 //等待标志位被置为true
-                while (!Thread.currentThread().isInterrupted()) {
+                while (Thread.interrupted()) {
+                    System.out.println("interrupt");
                 }
             }
             System.out.println("exit");

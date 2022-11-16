@@ -84,7 +84,7 @@ public class Circle {
             slow = slow.next;
             fast = fast.next.next;
 
-            if (slow == fast) { // 存在环
+            if (slow == fast) {
                 // 相遇之后，两个指针以相同的速度继续走，直到再次相遇，相遇节点即环的入口点
                 // 相遇点到入口点的距离 +  n * 环长 = 头节点到入口点的距离
                 fast = head;

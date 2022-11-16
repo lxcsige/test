@@ -1,7 +1,5 @@
 package BuilderTest;
 
-import java.util.List;
-
 /**
  * User: lxcfour
  * Date: 2018/3/12
@@ -9,92 +7,52 @@ import java.util.List;
  */
 public class Query {
 
-    private String queryType;
+    private String clientId;
 
-    private String dataSource;
+    private String secret;
 
-    private String granularity;
+    private String query;
 
-    private List<String> dimensions;
-
-    private Object filter;
-
-    private String intervals;
-
-    private String aggregations;
-
-    private String postAggregations;
+    private long timestamp;
 
     public Query() {
-
+        this(new Builder());
     }
 
-    public Query(Builder builder) {
-        this.queryType = builder.queryType;
-        this.dataSource = builder.dataSource;
-        this.granularity = builder.granularity;
-        this.dimensions = builder.dimensions;
-        this.filter = builder.filter;
-        this.intervals = builder.intervals;
-        this.aggregations = builder.aggregations;
-        this.postAggregations = builder.postAggregations;
+    Query(Builder builder) {
+        this.clientId = builder.clientId;
+        this.secret = builder.secret;
+        this.query = builder.query;
+        this.timestamp = builder.timestamp;
     }
 
     public static class Builder {
 
-        private String queryType;
+        private String clientId = "default";
 
-        private String dataSource;
+        private String secret = "default";
 
-        private String granularity;
+        private String query = "";
 
-        private List<String> dimensions;
+        private long timestamp = 0L;
 
-        private Object filter;
-
-        private String intervals;
-
-        private String aggregations;
-
-        private String postAggregations;
-
-        public Builder queryType (String queryType) {
-            this.queryType = queryType;
+        public Builder clientId (String clientId) {
+            this.clientId = clientId;
             return this;
         }
 
-        public Builder dataSource (String dataSource) {
-            this.dataSource = dataSource;
+        public Builder secret (String secret) {
+            this.secret = secret;
             return this;
         }
 
-        public Builder granularity (String granularity) {
-            this.granularity = granularity;
+        public Builder query (String query) {
+            this.query = query;
             return this;
         }
 
-        public Builder intervals (String intervals) {
-            this.intervals = intervals;
-            return this;
-        }
-
-        public Builder filter (Object filter) {
-            this.filter = filter;
-            return this;
-        }
-
-        public Builder dimensions (List<String> dimensions) {
-            this.dimensions = dimensions;
-            return this;
-        }
-
-        public Builder aggregations (String aggregations) {
-            this.aggregations = aggregations;
-            return this;
-        }
-
-        public Builder postAggregations (String postAggregations) {
-            this.postAggregations = postAggregations;
+        public Builder timestamp (long timestamp) {
+            this.timestamp = timestamp;
             return this;
         }
 
