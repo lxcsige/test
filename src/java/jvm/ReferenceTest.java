@@ -10,18 +10,33 @@ public class ReferenceTest {
 
     public static void main(String[] args) {
         ReferenceQueue<Object> rq = new ReferenceQueue<>();
-        WeakReference<Object> weakReference = new WeakReference<>(new Object(), rq);
-        System.out.println(weakReference.get());
-        System.out.println(rq.poll());
-        System.gc();
-        System.out.println(weakReference.get());
-        System.out.println(rq.poll());
+//        WeakReference<Object> weakReference = new WeakReference<>(new Object(), rq);
+//
+//        System.gc();
+//
+//        System.out.println(weakReference.get());
+//        Reference<?> reference;
+//        for (int i = 0; ; i++) {
+//            reference = rq.poll();
+//            System.out.println(i);
+//            System.out.println(reference);
+//            if (reference != null) {
+//                System.out.println(reference == weakReference);
+//                System.out.println(reference.get());
+//                break;
+//            }
+//        }
 
-        System.out.println("-------------------");
         PhantomReference<Object> phantomReference = new PhantomReference<>(new Object(), rq);
         System.gc();
-        Reference reference = rq.poll();
-        // 对于虚引用，gc不会自动清理referent，需要手动clear，或等到虚引用本身不可达
-        reference.clear();
+        for (int i = 0; ; i++) {
+            Reference<?> reference = rq.poll();
+//            System.out.println(i);
+//            System.out.println(reference);
+            if (reference != null) {
+                System.out.println("poll");
+                break;
+            }
+        }
     }
 }
